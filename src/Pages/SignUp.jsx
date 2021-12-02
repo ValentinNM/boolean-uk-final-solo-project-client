@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -33,12 +34,14 @@ const theme = createTheme();
 
 export default function SignUp({setAuthUser}) {
 
-    const API_URL = process.env.REACT_APP_API_URL
+  const navigate = useNavigate();
 
-    const [newUser, setNewUser] = useState({
-        email : "", 
-        password : ""
-    })
+  const API_URL = process.env.REACT_APP_API_URL
+
+  const [newUser, setNewUser] = useState({
+    email : "", 
+    password : ""
+  })
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -62,6 +65,8 @@ export default function SignUp({setAuthUser}) {
             setAuthUser(token)
 
             localStorage.setItem("token", token)
+
+            navigate('/dashboard')
         }
     })
 
@@ -75,6 +80,10 @@ const handleInput = (event) => {
 
     setNewUser({...newUser, [name] : value})
     
+}
+
+const handleNavigation = (event) => { 
+  navigate('/login')
 }
 
   return (
@@ -137,8 +146,8 @@ const handleInput = (event) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                <Link href="#" variant="body2" onClick={handleNavigation} >
+                  Already have an account? Log In
                 </Link>
               </Grid>
             </Grid>
