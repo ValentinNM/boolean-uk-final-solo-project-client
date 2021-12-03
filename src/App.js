@@ -1,16 +1,22 @@
 import './App.css';
-import {Router , Route} from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
+import {useState, useEffect} from 'react';
+import SignUp from './Pages/SignUp';
 
-function App() {
-  return (
-    <div>
-      <header>
-      </header>
-      <main>
-      <p> code works </p>
-      </main>
-    </div>
-  );
+export default function App() {
+
+    const [assets, setAssets] = useState([])
+    const [authUser, setAuthUser] = useState(null)
+
+    return (
+        <div>
+            <header></header>
+            <main>
+                <Routes>
+                    <Route path="/signup"
+                        element={<SignUp setAuthUser={setAuthUser} />} />
+                </Routes>
+            </main>
+        </div>
+    );
 }
-
-export default App;
