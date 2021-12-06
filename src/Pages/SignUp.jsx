@@ -38,6 +38,8 @@ export default function SignUp({setAuthUser}) {
 
   const API_URL = process.env.REACT_APP_API_URL
 
+  console.log({API_URL})
+
   const [newUser, setNewUser] = useState({
     email : "", 
     password : ""
