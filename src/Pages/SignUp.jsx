@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CALL_ME_SERVER } from "../utils/constants";
 
 function Copyright(props) {
   return (
@@ -32,61 +33,56 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp({setAuthUser}) {
-
+export default function SignUp({ setAuthUser }) {
   const navigate = useNavigate();
 
-  const API_URL = process.env.REACT_APP_API_URL
-
-  console.log({API_URL})
-
   const [newUser, setNewUser] = useState({
-    email : "", 
-    password : ""
-  })
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const fetchOptions = { 
-        method : "POST",
-        headers : { 
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(newUser) 
-    }
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    };
 
-    fetch(`${API_URL}/auth/signup`, fetchOptions)
-    .then((res) => res.json())
-    .catch(error => console.log({error}))
-    .then((data) => { 
-
-        const token = data.token
-
-        if(token){ 
-            setAuthUser(token)
-
-            localStorage.setItem("token", token)
-
-            navigate('/dashboard')
+    fetch(`${CALL_ME_SERVER}/auth/signup`, fetchOptions)
+      .then((res) => res.json())
+      .catch((error) => {
+        console.log({ error })
+        if(error){ 
+          window.alert("Username or Password is missing")
         }
-    })
+      })
+      .then((data) => {
+        const token = data.token;
 
+        if (token) {
+          setAuthUser(token);
+
+          localStorage.setItem("token", token);
+
+          navigate("/dashboard");
+        }
+      });
   };
 
+  const handleInput = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-const handleInput = (event) => { 
-    
-    const name = event.target.name
-    const value = event.target.value
+    setNewUser({ ...newUser, [name]: value });
+  };
 
-    setNewUser({...newUser, [name] : value})
-    
-}
-
-const handleNavigation = (event) => { 
-  navigate('/login')
-}
+  const handleNavigation = (event) => {
+    navigate("/login");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -148,7 +144,7 @@ const handleNavigation = (event) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2" onClick={handleNavigation} >
+                <Link href="#" variant="body2" onClick={handleNavigation}>
                   Already have an account? Log In
                 </Link>
               </Grid>

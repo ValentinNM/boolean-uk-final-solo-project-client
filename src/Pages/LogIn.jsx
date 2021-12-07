@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { CALL_ME_SERVER } from '../utils/constants'
 
 function Copyright(props) {
   return (
@@ -33,8 +34,6 @@ export default function LogIn({setAuthUser}) {
 
     const navigate = useNavigate();
 
-    const API_URL = process.env.REACT_APP_API_URL
-
     const [user, setUser] = useState({
         email : "", 
         password : ""
@@ -52,7 +51,7 @@ export default function LogIn({setAuthUser}) {
         body : JSON.stringify(user) 
     }
 
-    fetch(`${API_URL}/auth/login`, fetchOptions)
+    fetch(`${CALL_ME_SERVER}/auth/login`, fetchOptions)
     .then((res) => res.json())
     .catch(error => console.log({error}))
     .then((data) => { 
