@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  max-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  /* line-height: 1.5; */
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.two-columns-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.quantity-input-field {
+  max-width: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+.sell-all-btn {
+  outline: none;
+  max-height: 30px;
+  width: 130px;
+}
+
+.margin-ten {
+  margin-left: 10px;
+}
+
+.app_main_container {
+  display: grid;
+  grid-template-columns: 255px 1fr;
+}
+
+/* News START */
+.center {
+  /* REUSABLE */
+  display: grid;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  background-color: #f5f5f5;
+  display: grid;
+  padding: 20px;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .centre {
+  padding-top: 6.5rem;
+}
+/* News END*/
+
+/* Validation START */
+.center-style-form {
+  border: 1px solid rgb(17, 1, 1);
+  border-radius: 1rem;
+  max-width: 60ch;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.validation-address {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.two-columns-spaced {
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.margin {
+  margin: 3rem 0 6rem 0;
+}
+/* Validation END */
+
+/* Dashboard START */
+.assets-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.asset-container {
+  display: grid;
+  border: 1px solid rgb(17, 1, 1);
+  border-radius: 1rem;
+  max-width: fit-content;
+
+  padding: 1rem;
+  gap: 5px;
+}

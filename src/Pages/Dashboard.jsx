@@ -11,7 +11,7 @@ export default function Dashboard() {
   useEffect(() => {
     fetch(`${STOCKS_API}/stock/peers?symbol=AAPL&token=${STOCKS_TOKEN}`)
       .then((res) => res.json())
-      .catch(console.error())
+      .catch(console.error)
       .then((symbols) => {
         const cleanSymbols = symbols.filter((symbol) => symbol !== "1337.HK");
 
@@ -37,7 +37,8 @@ export default function Dashboard() {
     const assetToBuy = {
       assetSymbol: stock.symbol,
       price: stock.prices.c,
-      quantity: parseFloat(quantityToTrack)
+      quantity: quantityToTrack,
+      type: "BUY",
     };
 
     const fetchOptions = {
@@ -54,7 +55,7 @@ export default function Dashboard() {
       .catch(console.error())
       .then((data) => {
         const {asset} = data;
-        window.alert(`Congrats 🎉 \n You just bought your ${asset.assetSymbol} stock `)
+        window.alert(`Congrats 🎉 \n You just bought your ${asset.assetSymbol} stock `) // to be replaced with UI popup
       })
       .catch(console.error());
   };
@@ -66,25 +67,28 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <div>
+      <header className="header">
+      <h1 >Dashboard</h1>
+      </header>
+      <div className="assets-container" >
         {stocks.map((stock, index) => {
           const { symbol, prices } = stock;
           return (
-            <div key={index}>
-              <h2> Stock: {symbol} </h2>
-              <p>current price: ${prices.c}</p>
-              <p>open price: ${prices.o}</p>
-              <p>previous close price: ${prices.pc}</p>
-              <p>day high: ${prices.h}</p>
-              <p>day low: ${prices.l}</p>
-              <div className="stocks-options">
+            <div key={index} className="asset-container">
+              <h2>Asset symbol: {symbol} </h2>
+              <p>Current price: ${prices.c}</p>
+              <p>Open price: ${prices.o}</p>
+              <p>Previous close price: ${prices.pc}</p>
+              <p>Day high: ${prices.h}</p>
+              <p>Day low: ${prices.l}</p>
+              <hr />
+              <div className="two-columns-grid">
                 <label htmlFor="quantity">
                   <input
                     onChange={handleQuantityChange}
                     type="number"
-                    min="0.5"
-                    step="0.01"
+                    min="1"
+                    step="1"
                     name="quantity"
                     id="quantity"
                     style={{ maxWidth: 40 + "px" }}
