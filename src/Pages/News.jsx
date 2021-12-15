@@ -9,7 +9,7 @@ import { STOCKS_API, STOCKS_TOKEN } from "../utils/constants";
 
 export default function News() {
   const [news, setNews] = useState([]);
-  const [category, setCategory] = useState("forex"); // if not set = "top news" as default
+  const [category, setCategory] = useState("forex");
 
   useEffect(() => {
     fetch(
@@ -18,7 +18,6 @@ export default function News() {
       .then((res) => res.json())
       .catch((error) => console.error({ error }))
       .then((data) => {
-        console.log({ data });
 
         setNews(data);
       });
@@ -32,33 +31,33 @@ export default function News() {
 
   return (
     <>
-      <header className="sticky header">
+    <div>
+      <header className="sticky header">  {/* TODO -> FIX sticky header centering of items and height*/}
         <nav className="news-category-selection">
           <Button value="general" onClick={handlePick}>
-            general{" "}
+            General{" "}
           </Button>
           <Button value="forex" onClick={handlePick}>
-            forex
+            Forex
           </Button>
           <Button value="crypto" onClick={handlePick}>
-            crypto
+            Crypto
           </Button>
           <Button value="merger" onClick={handlePick}>
-            merger
+            Merger
           </Button>
         </nav>
       </header>
       <div className="center">
         {news.map((article, index) => {
-          const { datetime, headline, image, related, source, summary, url } =
-            article;
+          const { headline, image, summary, url } = article;
 
           return (
             <Card key={index} sx={{ maxWidth: 545 }}>
               <CardMedia
                 component="img"
                 height="140"
-                image={`${image}`}
+                image={image}
                 alt="article"
               />
               <CardContent>
@@ -70,14 +69,14 @@ export default function News() {
                 </Typography>
               </CardContent>
               <CardActions>
-                {/* <Button className="!!-MIGHT-DELETE-IF-NO-ABLE-TO-GENERATE-SHAREABLE-LINK" size="small">Share</Button> */}
                 <Button  color="secondary" size="small">
-                  <a href={`${url}`}>See More</a>
+                  <a href={url}>See More</a>
                 </Button>
               </CardActions>
             </Card>
           );
         })}
+      </div>
       </div>
     </>
   );
