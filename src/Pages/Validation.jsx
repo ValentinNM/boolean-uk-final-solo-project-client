@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CALL_ME_SERVER } from "../utils/constants";
 
@@ -14,7 +14,6 @@ export default function Validation() {
   const token = localStorage.getItem("token");
 
   const [profileToValidate, setProfileToValidate] = useState([]);
-  // const [isChecked, setIsChecked] = useState([true, false]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,16 +27,12 @@ export default function Validation() {
       body: JSON.stringify(profileToValidate),
     };
 
-    console.log({ profileToValidate });
-
-    fetch(`${CALL_ME_SERVER}/profile/validate`, fetchOptions)
+    fetch(`${CALL_ME_SERVER}/users/validation`, fetchOptions)
       .then((res) => res.json())
       .then((account) => {
-        console.log({ account });
-
-        if (!account) {
-          alert(account.error);
-        } else {
+        if (account.error) {
+          alert("Error: Unknown" + "\n" + "Please try again");
+        } else if (account.profile) {
           navigate("/dashboard");
         }
       });
@@ -46,18 +41,12 @@ export default function Validation() {
   const handleUserInput = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+    const checked = event.target.checked;
 
-    if (name === "checkbox" && event.target.checked !== false) {
+    if (name === "subscribed") {
       setProfileToValidate({
         ...profileToValidate,
-        [name]: event.target.checked,
-      });
-    } else if (name === "dob") {
-      let dob = Date(value).toStringISO();
-
-      setProfileToValidate({
-        ...profileToValidate,
-        [name]: dob,
+        [name]: checked,
       });
     } else {
       setProfileToValidate({
@@ -135,45 +124,36 @@ export default function Validation() {
           />
         </div>
         <div>
-          {/* TODO-> FIND THE RIGHT MUI DATE ELEMENT TO BE ADDED */}
           <TextField
-            id="standard-helperText"
-            label="Date of Birth"
+            required
             name="dob"
+            label="Date of Birth"
+            type="date"
             onChange={handleUserInput}
-            helperText="Format: DD-MM-YYYY"
-            variant="standard"
-          />
-          {/* <TextField
-            id="standard-number"
-            label="Starting Balance"
-            type="number"
-            name="startingBalance"
-            onChange={handleUserInput}
-            variant="standard"
-            placeholder="0.00"
+            sx={{ width: 220 }}
             InputLabelProps={{
               shrink: true,
             }}
-          /> */}
+          />
+          <TextField
+            disabled
+            id="standard-disabled"
+            label="Your Demo Starting Balance"
+            defaultValue=" $ 100,000 "
+            variant="standard"
+          />
         </div>
         <div className="two-columns-spaced">
           <FormGroup>
             <FormControlLabel
               control={
-                <Checkbox
-                  type="checkbox"
-                  // checked={isChecked}
-                  name="subscribed"
-                  onClick={handleUserInput}
-                />
+                <Checkbox name="subscribed" onChange={handleUserInput} />
               }
               label="Subscribe to our weekly newsletter"
             />
           </FormGroup>
           <Button variant="outlined" onClick={handleSubmit}>
-            {" "}
-            Submit{" "}
+            Submit
           </Button>
         </div>
       </section>
