@@ -6,7 +6,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 
 export default function Sidemenu() {
-
   const navigate = useNavigate();
 
   const handleClick = (e, text) => {
@@ -19,19 +18,23 @@ export default function Sidemenu() {
       <Box
         sx={{
           width: 250,
-          // height: "100vh", position: "fixed", top: 0, left: 0, zIndex: 1
+          height: "100vh",
+          position: "fixed",
         }}
       >
         <List>
-          {["dashboard", "portofolio", "register", "news"].map((text, index) => (
-            <ListItem 
-            variant="h3"
-
-            button key={index} onClick={(e) => handleClick(e, text)}>
-              <ListItemText
-              primary={text} />
-            </ListItem>
-          ))}
+          {["dashboard", "portofolio", "trades", "account", "news"].map(
+            (text, index) => (
+              <ListItem
+                variant="h2"
+                button
+                key={index}
+                onClick={(e) => handleClick(e, text)}
+              >
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+          )}
         </List>
         <Divider />
       </Box>
