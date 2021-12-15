@@ -122,3 +122,32 @@ ul {
   padding: 1rem;
   gap: 5px;
 }
+
+.table-grid { 
+  display: grid;
+  border: 2px solid black;
+}
+
+.table-columns { 
+  display: grid;
+  grid-template-columns: repeat(6, Auto);
+  border: 1px dotted rgb(17, 1, 1);
+  gap: 2px;
+}
+
+.table-cell { 
+  border: 1px solid black;
+}
+
+.two-column-trades { 
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 10px;
+}
+
+.trades-aside { 
+  display: grid; 
+  border: 1px solid black;
+  row-gap: 10px;
+}
+
