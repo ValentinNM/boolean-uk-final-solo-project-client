@@ -3,37 +3,53 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidemenu() {
-
+export default function Sidemenu({authUser ,setAuthUser}) {
   const navigate = useNavigate();
 
   const handleClick = (e, text) => {
-    console.log({ text });
+
     navigate(text);
   };
+
+  const handleLogout = (e) => { 
+  
+    localStorage.clear("token")
+
+    setAuthUser(null)
+
+
+      navigate("/login")
+  }
+    
 
   return (
     <div>
       <Box
         sx={{
           width: 250,
-          // height: "100vh", position: "fixed", top: 0, left: 0, zIndex: 1
+          height: "100vh",
+          position: "fixed",
         }}
       >
         <List>
-          {["dashboard", "portofolio", "register", "news"].map((text, index) => (
-            <ListItem 
-            variant="h3"
-
-            button key={index} onClick={(e) => handleClick(e, text)}>
-              <ListItemText
-              primary={text} />
-            </ListItem>
-          ))}
+          {["dashboard", "portofolio", "trades", "account", "news"].map(
+            (text, index) => (
+              <ListItem
+                variant="h2"
+                button
+                key={index}
+                onClick={(e) => handleClick(e, text)}
+              >
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+          )}
         </List>
         <Divider />
+        <Button onClick={handleLogout} >Log out</Button>
       </Box>
     </div>
   );
