@@ -3,15 +3,27 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidemenu() {
+export default function Sidemenu({authUser ,setAuthUser}) {
   const navigate = useNavigate();
 
   const handleClick = (e, text) => {
-    console.log({ text });
+
     navigate(text);
   };
+
+  const handleLogout = (e) => { 
+  
+    localStorage.clear("token")
+
+    setAuthUser(null)
+
+
+      navigate("/login")
+  }
+    
 
   return (
     <div>
@@ -37,6 +49,7 @@ export default function Sidemenu() {
           )}
         </List>
         <Divider />
+        <Button onClick={handleLogout} >Log out</Button>
       </Box>
     </div>
   );

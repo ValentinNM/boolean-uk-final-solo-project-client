@@ -68,7 +68,7 @@ export default function SignUp({ setAuthUser }) {
 
           localStorage.setItem("token", token);
 
-          navigate("/dashboard");
+          navigate("/register");
         }
       });
   };

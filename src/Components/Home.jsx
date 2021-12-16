@@ -8,17 +8,14 @@ import Portofolio from "../Pages/Portofolio";
 import Sidemenu from "../Pages/Sidemenu";
 import Account from "../Pages/AccountSettings";
 import EditProfile from "../Pages/EditProfile";
-import { useState } from "react";
 
 export default function Home(props) {
-  const { authUser } = props;
-
-  const [showFilter, setShowFilter] = useState(null)
+  const { authUser, setAuthUser } = props;
 
   return (
     <>
       <div className="app_main_container">
-        <Sidemenu showFilter={showFilter} />
+        <Sidemenu authUser={authUser} setAuthUser={setAuthUser} />
         <Routes>
           <Route
             path="/dashboard"
@@ -28,7 +25,7 @@ export default function Home(props) {
             path="/portofolio"
             element={<Portofolio authUser={authUser} />}
           />
-          <Route path="/trades" element={<Trades setShowFilter={setShowFilter} />} />
+          <Route path="/trades" element={<Trades />} />
           <Route path="/account" element={<Account />} />
           <Route path="/profile/edit" element={<EditProfile />} />
           {/* <Route path="/trades" element={<TradesTesting />} /> */}
