@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import {  STOCKS_API, STOCKS_TOKEN, CALL_ME_SERVER} from "../utils/constants"
 
 export default function Dashboard() {
   const [stocks, setStocks] = useState([]);
   const [quantityToTrack, setQuantityToTrack] = useState(null);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${STOCKS_API}/stock/peers?symbol=AAPL&token=${STOCKS_TOKEN}`)

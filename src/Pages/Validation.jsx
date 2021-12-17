@@ -31,7 +31,7 @@ export default function Validation() {
       .then((res) => res.json())
       .then((account) => {
         if (account.error) {
-          alert("Error: Unknown" + "\n" + "Please try again");
+          alert("Error: Unknown\n Please try again");
         } else if (account.profile) {
           navigate("/dashboard");
         }

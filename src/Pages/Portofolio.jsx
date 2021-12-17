@@ -144,7 +144,7 @@ const EnhancedTableToolbar = () => {  // Portofolio Toolbar ?? maybe just remove
         id="tableTitle"
         component="div"
       >
-        Portofoloio
+        Portofolio
       </Typography>
     </Toolbar>
   );
@@ -152,7 +152,7 @@ const EnhancedTableToolbar = () => {  // Portofolio Toolbar ?? maybe just remove
 
 export default function Dashboard() {
   const [portfolio, setPortfolio] = useState([]);
-  const [revenue, setRevenue] = useState(0);
+  // const [revenue, setRevenue] = useState(0);
   const [amountInput, setAmountInput] = useState(null);
 
   const token = localStorage.getItem("token");
@@ -183,7 +183,7 @@ export default function Dashboard() {
         });
       })
       .catch((error) => console.error({ error }));
-  }, []);
+  },[]);
 
   const handleTrackQuantity = (e) => {
     setAmountInput(e.target.value);
@@ -196,8 +196,6 @@ export default function Dashboard() {
     const { assetSymbol, currentPrices, quantity } = asset;
 
     const buttonName = e.target.name;
-
-    let quantToSet = quantity - amountInput;
 
     if (amountInput > quantity) {
       window.alert("You can't sell more than you have");

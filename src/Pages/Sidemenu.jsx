@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function Sidemenu({authUser ,setAuthUser}) {
+export default function Sidemenu({setAuthUser}) {
   const navigate = useNavigate();
 
   const handleClick = (e, text) => {
@@ -19,7 +19,6 @@ export default function Sidemenu({authUser ,setAuthUser}) {
     localStorage.clear("token")
 
     setAuthUser(null)
-
 
       navigate("/login")
   }

@@ -19,7 +19,7 @@ export default function EditProfile() {
     if (location.state) {
       setProfileToEdit(location.state);
     }
-  }, []);
+  }, [location.state]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

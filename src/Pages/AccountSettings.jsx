@@ -13,14 +13,12 @@ export default function Account() {
   };
 
   useEffect(() => {
-    fetch(CALL_ME_SERVER + "/users/profile/view", fetchOptions)
+    fetch(`${CALL_ME_SERVER}/users/profile/view`, fetchOptions)
       .then((res) => res.json())
       .then((data) => {
         setProfileData(data.profile);
       });
-  }, []);
-
-  console.log({ profileData });
+  },[]);
 
   const {
     firstName,
@@ -35,7 +33,7 @@ export default function Account() {
 
   let { dob } = profileData;
 
-  //  TODO dob = dob.split("T")[0];
+  // let dob = dob.split("T")[0];
 
   return (
     <>
@@ -48,7 +46,7 @@ export default function Account() {
             <h2>Profile</h2>
             <p>First Name: {firstName}</p>
             <p>Last Name: {lastName}</p>
-            <p>Date of birth: {dob}</p>
+            <p>Date of birth: {dob }</p>
             <p>Address: {mainAddress}</p>
             <p>City: {city}</p>
             <p>Postcode: {postcode}</p>

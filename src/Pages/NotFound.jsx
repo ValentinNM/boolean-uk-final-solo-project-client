@@ -7,16 +7,15 @@ export default function NotFound (){
   const navigate = useNavigate();
 
   const backToSafe = (event) => { 
+
     navigate('/dashboard')
   }
 
   return(
       <>
-    {/* <Head> */}
       <title>
         404 | Material Kit
       </title>
-    {/* </Head> */}
     <Box
       component="main"
       sx={{

@@ -11,29 +11,32 @@ import EditProfile from "../Pages/EditProfile";
 
 export default function Home(props) {
   const { authUser, setAuthUser } = props;
+  // console.log({authUser})
 
   return (
     <>
-      <div className="app_main_container">
-        <Sidemenu authUser={authUser} setAuthUser={setAuthUser} />
-        <Routes>
-          <Route
-            path="/dashboard"
-            element={<Dashboard authUser={authUser} />}
-          />
-          <Route
-            path="/portofolio"
-            element={<Portofolio authUser={authUser} />}
-          />
-          <Route path="/trades" element={<Trades />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
-          {/* <Route path="/trades" element={<TradesTesting />} /> */}
-          <Route path="/news" element={<News />} />
-          <Route path="*" element={<NotFound />} />{" "}
-          {/* TODO -> to redirect to NotFound within App.js; so page will be full full browser view*/}
-        </Routes>
-      </div>
+      {authUser && (
+        <div className="app_main_container">
+          <Sidemenu setAuthUser={setAuthUser} />
+          <Routes>
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+            <Route
+              path="/portofolio"
+              element={<Portofolio />}
+            />
+            <Route path="/trades" element={<Trades />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
+            {/* <Route path="/trades" element={<TradesTesting />} /> */}
+            <Route path="/news" element={<News />} />
+            <Route path="*" element={<NotFound />} />{" "}
+            {/* TODO -> to redirect to NotFound within App.js; so page will be full full browser view*/}
+          </Routes>
+        </div>
+      )}
     </>
   );
 }
