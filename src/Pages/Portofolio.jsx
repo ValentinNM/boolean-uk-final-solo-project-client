@@ -89,7 +89,8 @@ const headCells = [
   },
 ];
 
-function EnhancedTableHead(props) { // sorting the table
+function EnhancedTableHead(props) {
+  // sorting the table
   const { order, orderBy, onRequestSort } = props;
 
   const createSortHandler = (property) => (event) => {
@@ -125,19 +126,18 @@ function EnhancedTableHead(props) { // sorting the table
   );
 }
 
-EnhancedTableHead.propTypes = { // prop types ? have no Ideea lol
+EnhancedTableHead.propTypes = {
+  // prop types ? have no Ideea lol
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = () => {  // Portofolio Toolbar ?? maybe just remove it
+const EnhancedTableToolbar = () => {
+  // Portofolio Toolbar ?? maybe just remove it
   return (
-    <Toolbar
-    sx={{ pl: { sm: 2 },
-    pr: { xs: 1, sm: 1 } }}
-    >
+    <Toolbar sx={{ pl: { sm: 2 }, pr: { xs: 1, sm: 1 } }}>
       <Typography
         sx={{ flex: "1 1 100%" }}
         variant="h3"
@@ -169,7 +169,7 @@ export default function Dashboard() {
         const symbols = assets.portofolio.map((asset) => {
           const { assetSymbol } = asset;
 
-          return fetch( 
+          return fetch(
             `${STOCKS_API}/quote?symbol=${assetSymbol}&token=${STOCKS_TOKEN}`
           )
             .then((res) => res.json())
@@ -183,11 +183,11 @@ export default function Dashboard() {
         });
       })
       .catch((error) => console.error({ error }));
-  },[]);
+  }, []);
 
   const handleTrackQuantity = (e) => {
     setAmountInput(e.target.value);
-    console.log({ inside_handleTrackQuantity : e.target.value });
+    console.log({ inside_handleTrackQuantity: e.target.value });
   };
 
   const handleSellQuantity = (e, asset) => {
@@ -210,7 +210,7 @@ export default function Dashboard() {
         type: "SELL",
       };
 
-      console.log({assetToSell});
+      console.log({ assetToSell });
 
       // TODO name for rutes: exchange/trade  rather than buy/sell
 
@@ -233,14 +233,15 @@ export default function Dashboard() {
           //   const balanceUpdated = balance + performance;
           // }
           window.alert(
-            "You have sold " + (buttonName === "all" ? quantity : amountInput) + " shares of " + assetSymbol
+            "You have sold " +
+              (buttonName === "all" ? quantity : amountInput) +
+              " shares of " +
+              assetSymbol
           );
         })
         .catch((error) => console.error({ error }));
     }
   };
-
-  console.log({ portfolio });
 
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -297,19 +298,16 @@ export default function Dashboard() {
 
                   const { assetSymbol, price, quantity, currentPrices } = asset;
 
-                  // const avgPrice = price
                   const avgPrice = price.toFixed(2);
 
-                  const profit = (currentPrices.c * quantity - avgPrice * quantity).toFixed(2);
-                  // REVENUE -> to solve the NaN error when price = 0
-                  // setRevenue(revenue + profit);
+                  const profit = (
+                    currentPrices.c * quantity -
+                    avgPrice * quantity
+                  ).toFixed(2);
+                  // TODO - setRevenue
 
                   return (
-                    <TableRow
-                      hover
-                      key={index}
-                      // tabIndex={-1}
-                    >
+                    <TableRow hover key={index}>
                       <TableCell
                         component="th"
                         id={labelId}
@@ -336,9 +334,11 @@ export default function Dashboard() {
                               step="1"
                               onChange={handleTrackQuantity}
                             />
-                            <Button size="small" variant="contained"
-                             name="sell"
-                             onClick={(e) => handleSellQuantity(e, asset)}
+                            <Button
+                              size="small"
+                              variant="contained"
+                              name="sell"
+                              onClick={(e) => handleSellQuantity(e, asset)}
                             >
                               Sell
                             </Button>

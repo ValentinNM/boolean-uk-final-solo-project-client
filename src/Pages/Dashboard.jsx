@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {  STOCKS_API, STOCKS_TOKEN, CALL_ME_SERVER} from "../utils/constants"
+import { STOCKS_API, STOCKS_TOKEN, CALL_ME_SERVER } from "../utils/constants";
 
 export default function Dashboard() {
   const [stocks, setStocks] = useState([]);
@@ -29,7 +29,7 @@ export default function Dashboard() {
   const handleSubmit = (e, stock) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
 
     const assetToBuy = {
       assetSymbol: stock.symbol,
@@ -42,7 +42,7 @@ export default function Dashboard() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "authorization" : token
+        authorization: token,
       },
       body: JSON.stringify(assetToBuy),
     };
@@ -51,8 +51,10 @@ export default function Dashboard() {
       .then((res) => res.json())
       .catch(console.error())
       .then((data) => {
-        const {asset} = data;
-        window.alert(`Congrats 🎉 \n You just bought your ${asset.assetSymbol} stock `) // to be replaced with UI popup
+        const { asset } = data;
+        window.alert(
+          `Congrats 🎉 \n You just bought your ${asset.assetSymbol} stock `
+        ); // to be replaced with UI popup
       })
       .catch(console.error());
   };
@@ -65,9 +67,9 @@ export default function Dashboard() {
   return (
     <div>
       <header className="header">
-      <h1 >Dashboard</h1>
+        <h1>Dashboard</h1>
       </header>
-      <div className="assets-container" >
+      <div className="assets-container">
         {stocks.map((stock, index) => {
           const { symbol, prices } = stock;
           return (
